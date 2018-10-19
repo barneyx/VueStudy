@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+            <my-component ></my-component>
+            <my-component3 message="这个是组件接收到父级的内容"></my-component3><br>
+
+    </div>
+    <script>
+        var data={
+            counter:0
+        }
+
+        Vue.component('my-component',{
+            template:'<button @click="counter++">{{counter}}</button>',
+            data(){
+                return{
+                    counter:0
+                }
+            }
+        });
+
+        Vue.component('my-component3',{
+            props:['message'],
+            template:'<div>{{message}}</div>'
+        })
+
+        var Child = {
+            template:'<div>局部注册组件内容</div>'
+        }
+        var app = new Vue({
+            components:{
+                'my-component2':Child,
+            },
+            el: "#app",
+            data: {
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>
